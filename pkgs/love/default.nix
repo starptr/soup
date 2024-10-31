@@ -1,15 +1,15 @@
-{ stdenvNoCC, fetchurl, lib, unzip, flake-inputs }:
+{ stdenvNoCC, fetchurl, lib, unzip, maybe-flake-inputs }:
 let
   version = "11.5";
-  src = if builtins.isNull flake-inputs
+  src = if builtins.isNull maybe-flake-inputs
     then
       fetchurl {
         url = "https://github.com/love2d/love/releases/download/${version}/love-${version}-macos.zip";
         hash = "sha256-Z5W7OhZWr2ov3+dB4VB4e0gYhtOigDJ6Jho/3e1YaRM=";
       }
     else
-      flake-inputs.love;
-  sourceRoot = if builtins.isNull flake-inputs
+      maybe-flake-inputs.love;
+  sourceRoot = if builtins.isNull maybe-flake-inputs
     then
       "./love.app"
     else

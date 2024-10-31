@@ -1,12 +1,20 @@
-{
+{ maybe-flake-inputs }: {
   # Add your overlays here
   #
   # my-overlay = import ./my-overlay;
-  expand-love = import ./expand-love.nix;
+  expand-love = self: super: {
+    love = if self.stdenv.hostPlatform.isDarwin
+      then (self.callPackage ./.. { inherit maybe-flake-inputs; }).love
+      else super.love;
+  };
 
   # This overlay naively adds all of the pkgs.
   #default = import ../overlay.nix;
-  chaseln = self: super: {
-    chaseln = (self.callPackage ../. { }).chaseln;
-  };
+  chaseln = if maybe-flake-inputs.isNull
+    then
+      self: super: {
+        chaseln = (self.callPackage ../. { inherit maybe-flake-inputs; }).chaseln;
+      }
+    else
+      maybe-flake-inputs.chaseln.overlays.default;
 }

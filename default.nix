@@ -6,17 +6,17 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { }, flake-inputs ? null }:
+{ pkgs ? import <nixpkgs> { }, maybe-flake-inputs ? null }:
 
 {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
-  overlays = import ./overlays; # nixpkgs overlays
+  overlays = import ./overlays { inherit maybe-flake-inputs; }; # nixpkgs overlays
 
   example-package = pkgs.callPackage ./pkgs/example-package { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
-  love = pkgs.callPackage ./pkgs/love { inherit flake-inputs; };
-  chaseln = pkgs.callPackage ./pkgs/chaseln { inherit flake-inputs; };
+  love = pkgs.callPackage ./pkgs/love { inherit maybe-flake-inputs; };
+  chaseln = pkgs.callPackage ./pkgs/chaseln { inherit maybe-flake-inputs; };
 }

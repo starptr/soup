@@ -35,15 +35,16 @@
         "armv7l-linux"
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+      flake-inputs = {
+        inherit (inputs) love chaseln;
+      };
     in
     {
       legacyPackages = forAllSystems (system: import ./default.nix {
+        inherit flake-inputs;
         pkgs = import nixpkgs { inherit system; };
-        flake-inputs = {
-          inherit (inputs) love chaseln;
-        };
       });
       packages = forAllSystems (system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system});
-      overlays = import ./overlays;
+      overlays = import ./overlays { inherit flake-inputs; };
     };
 }
