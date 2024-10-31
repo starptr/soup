@@ -41,10 +41,10 @@
     in
     {
       legacyPackages = forAllSystems (system: import ./default.nix {
-        inherit flake-inputs;
+        maybe-flake-inputs = flake-inputs;
         pkgs = import nixpkgs { inherit system; };
       });
       packages = forAllSystems (system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system});
-      overlays = import ./overlays { inherit flake-inputs; };
+      overlays = import ./overlays { maybe-flake-inputs = flake-inputs; };
     };
 }
