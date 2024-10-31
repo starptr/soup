@@ -1,16 +1,25 @@
-{ stdenvNoCC, fetchurl, lib, unzip }:
-stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "love";
+{ stdenvNoCC, fetchurl, lib, unzip, flake-inputs }:
+let
   version = "11.5";
-
-  src = fetchurl {
-    url = "https://github.com/love2d/love/releases/download/${finalAttrs.version}/love-${finalAttrs.version}-macos.zip";
-    hash = "sha256-Z5W7OhZWr2ov3+dB4VB4e0gYhtOigDJ6Jho/3e1YaRM=";
-  };
+  src = if builtins.isNull flake-inputs
+    then
+      fetchurl {
+        url = "https://github.com/love2d/love/releases/download/${version}/love-${version}-macos.zip";
+        hash = "sha256-Z5W7OhZWr2ov3+dB4VB4e0gYhtOigDJ6Jho/3e1YaRM=";
+      }
+    else
+      flake-inputs.love;
+  sourceRoot = if builtins.isNull flake-inputs
+    then
+      "./love.app"
+    else
+      "./source"; # For some reason, flake inputs are extracted differently
+in
+stdenvNoCC.mkDerivation (finalAttrs: {
+  inherit version src sourceRoot;
+  pname = "love";
 
   nativeBuildInputs = [ unzip ];
-
-  sourceRoot = "love.app";
 
   installPhase = ''
     mkdir -p $out/{bin,Applications/love.app}

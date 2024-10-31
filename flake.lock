@@ -1,5 +1,18 @@
 {
   "nodes": {
+    "love": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1709486057,
+        "narHash": "sha256-6pz66mZMpAkMBtTPzfhFs0Ws8cYVxWjrSroy2xoYgYQ=",
+        "type": "tarball",
+        "url": "https://github.com/love2d/love/releases/download/11.5/love-11.5-macos.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/love2d/love/releases/download/11.5/love-11.5-macos.zip"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1712449641,
@@ -18,6 +31,7 @@
     },
     "root": {
       "inputs": {
+        "love": "love",
         "nixpkgs": "nixpkgs"
       }
     }

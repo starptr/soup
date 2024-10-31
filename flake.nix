@@ -1,7 +1,13 @@
 {
   description = "My personal NUR repository";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  outputs = { self, nixpkgs }:
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    love = {
+      url = "https://github.com/love2d/love/releases/download/11.5/love-11.5-macos.zip";
+      flake = false;
+    };
+  };
+  outputs = { self, nixpkgs, ... } @ inputs:
     let
       systems = [
         "x86_64-linux"
@@ -17,6 +23,9 @@
     {
       legacyPackages = forAllSystems (system: import ./default.nix {
         pkgs = import nixpkgs { inherit system; };
+        flake-inputs = {
+          inherit (inputs) love;
+        };
       });
       packages = forAllSystems (system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system});
       overlays = import ./overlays;

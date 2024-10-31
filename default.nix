@@ -6,7 +6,7 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> { }, flake-inputs ? null }:
 
 {
   # The `lib`, `modules`, and `overlays` names are special
@@ -17,5 +17,5 @@
   example-package = pkgs.callPackage ./pkgs/example-package { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
-  love = pkgs.callPackage ./pkgs/love { };
+  love = pkgs.callPackage ./pkgs/love { inherit flake-inputs; };
 }
