@@ -10,7 +10,7 @@
 
   # This overlay naively adds all of the pkgs.
   #default = import ../overlay.nix;
-  chaseln = if maybe-flake-inputs.isNull
+  chaseln = if builtins.isNull maybe-flake-inputs
     then
       self: super: {
         chaseln = (self.callPackage ../. { inherit maybe-flake-inputs; }).chaseln;
