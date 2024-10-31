@@ -18,4 +18,5 @@
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
   love = pkgs.callPackage ./pkgs/love { inherit flake-inputs; };
+  chaseln = pkgs.callPackage ./pkgs/chaseln { inherit flake-inputs; };
 }
