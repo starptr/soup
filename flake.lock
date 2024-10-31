@@ -92,6 +92,22 @@
         "type": "github"
       }
     },
+    "dark-notify": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1613010370,
+        "narHash": "sha256-i90NsosFcRd6V2lPjJIG+R0KXwBtWj8L1J0JCJakmvs=",
+        "owner": "cormacrelf",
+        "repo": "dark-notify",
+        "rev": "891adc07dd7b367b840f1e9875b075fd8af4dc52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cormacrelf",
+        "repo": "dark-notify",
+        "type": "github"
+      }
+    },
     "devenv": {
       "inputs": {
         "cachix": "cachix",
@@ -182,6 +198,27 @@
         "owner": "cachix",
         "ref": "python-rewrite",
         "repo": "devenv",
+        "type": "github"
+      }
+    },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1730356297,
+        "narHash": "sha256-pMW/yx6urzUimYdMHLGKRWxu2wmWMd7Dqz9oiGHBi8o=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "3a35e2c06a31ff4420639a454eeca4ccdfe69f13",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
         "type": "github"
       }
     },
@@ -673,11 +710,30 @@
     "root": {
       "inputs": {
         "chaseln": "chaseln",
+        "dark-notify": "dark-notify",
         "devenv": "devenv",
+        "fenix": "fenix",
         "love": "love",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-devenv": "nixpkgs-devenv",
         "systems": "systems_2"
+      }
+    },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730315096,
+        "narHash": "sha256-Kvve0NSLliNl1cv7qLSPdVWqLUEeAq0aZGsMeV632Cg=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "8244f30eff828355f5ec92b2307c216d10caa25b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
       }
     },
     "systems": {

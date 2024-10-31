@@ -22,7 +22,27 @@
         devenv.follows = "devenv";
       };
     };
+    dark-notify = {
+      url = "github:cormacrelf/dark-notify";
+      flake = false;
+    };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
+
+  nixConfig = {
+    extra-trusted-public-keys = [
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    extra-substituters = [
+      "https://devenv.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+  };
+
   outputs = { self, nixpkgs, ... } @ inputs:
     let
       systems = [
@@ -36,7 +56,7 @@
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
       flake-inputs = {
-        inherit (inputs) love chaseln;
+        inherit (inputs) love chaseln dark-notify fenix;
       };
     in
     {
