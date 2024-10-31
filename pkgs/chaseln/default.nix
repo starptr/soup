@@ -2,7 +2,7 @@
 let
   chaseln-flake = if builtins.isNull flake-inputs
     then
-      builtins.getFlake "github:starptr/chaseln/fa"
+      builtins.getFlake "github:starptr/chaseln/9a72313e441b55104e1cdf759f8da20c39ac32b6"
     else
       flake-inputs.chaseln;
 in
