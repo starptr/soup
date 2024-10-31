@@ -79,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730335871,
-        "narHash": "sha256-LlfQeH2jr5j477jc9LoNnV0oMtfwE3HhpSyraFEgRHE=",
+        "lastModified": 1730349049,
+        "narHash": "sha256-DnAJD6t0cIs+dr742pF4U43dxpVqrroy009UjcqEq6I=",
         "owner": "starptr",
         "repo": "chaseln",
-        "rev": "9a72313e441b55104e1cdf759f8da20c39ac32b6",
+        "rev": "f0a373d3f697bd3406966cc43d0c8592218feb46",
         "type": "github"
       },
       "original": {
