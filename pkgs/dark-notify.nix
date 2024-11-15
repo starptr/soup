@@ -1,9 +1,16 @@
-{ stdenv, lib, makeRustPlatform, fetchFromGitHub, rustPackages, maybe-flake-inputs }:
+{ stdenv, lib, fetchFromGitHub, maybe-flake-inputs, flake-lock }:
 let
-  dark-notify-flake = if builtins.isNull maybe-flake-inputs
+  node-name = flake-lock.nodes.root.inputs.dark-notify;
+  locked = flake-lock.nodes.${node-name}.locked;
+  dark-notify = if builtins.isNull maybe-flake-inputs
     then
-      abort "non-flake dark-notify is not implemented yet"
+      import (fetchFromGitHub {
+        owner = locked.owner;
+        repo = locked.repo;
+        rev = locked.rev;
+        hash = locked.narHash;
+      })
     else
-      maybe-flake-inputs.dark-notify;
+      maybe-flake-inputs.dark-notify.packages.${stdenv.hostPlatform.system}.default;
 in
-dark-notify-flake.packages.${stdenv.hostPlatform.system}.default
+dark-notify
