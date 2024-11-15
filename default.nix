@@ -7,6 +7,11 @@
 #     nix-build -A mypackage
 
 { pkgs ? import <nixpkgs> { }, maybe-flake-inputs ? null }:
+let
+  callPackageWithMaybeFlakeInputs = pkgs.lib.callPackageWith (pkgs // {
+    inherit maybe-flake-inputs;
+  });
+in
 {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
@@ -16,7 +21,7 @@
   example-package = pkgs.callPackage ./pkgs/example-package { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
-  love = pkgs.callPackage ./pkgs/love { inherit maybe-flake-inputs; };
-  chaseln = pkgs.callPackage ./pkgs/chaseln { inherit maybe-flake-inputs; };
-  dark-notify = pkgs.callPackage ./pkgs/dark-notify.nix { inherit maybe-flake-inputs; };
+  love = callPackageWithMaybeFlakeInputs ./pkgs/love { };
+  chaseln = callPackageWithMaybeFlakeInputs ./pkgs/chaseln { };
+  dark-notify = callPackageWithMaybeFlakeInputs ./pkgs/dark-notify.nix { };
 }
