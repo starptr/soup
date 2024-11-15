@@ -23,8 +23,13 @@
       };
     };
     dark-notify = {
-      url = "github:cormacrelf/dark-notify";
-      flake = false;
+      url = "github:starptr/dark-notify";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-devenv";
+        systems.follows = "systems";
+        devenv.follows = "devenv";
+        fenix.follows = "fenix";
+      };
     };
     fenix = {
       url = "github:nix-community/fenix";

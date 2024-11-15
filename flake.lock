@@ -93,17 +93,30 @@
       }
     },
     "dark-notify": {
-      "flake": false,
+      "inputs": {
+        "devenv": [
+          "devenv"
+        ],
+        "fenix": [
+          "fenix"
+        ],
+        "nixpkgs": [
+          "nixpkgs-devenv"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
       "locked": {
-        "lastModified": 1613010370,
-        "narHash": "sha256-i90NsosFcRd6V2lPjJIG+R0KXwBtWj8L1J0JCJakmvs=",
-        "owner": "cormacrelf",
+        "lastModified": 1731633336,
+        "narHash": "sha256-kXJZF/eqi2HLkuhMBvqs7BRUYYgbfCUi0ij76AI5Xn0=",
+        "owner": "starptr",
         "repo": "dark-notify",
-        "rev": "891adc07dd7b367b840f1e9875b075fd8af4dc52",
+        "rev": "bad67b14f105ef1319948dbd1e5105009573f1fa",
         "type": "github"
       },
       "original": {
-        "owner": "cormacrelf",
+        "owner": "starptr",
         "repo": "dark-notify",
         "type": "github"
       }
