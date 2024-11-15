@@ -71,6 +71,7 @@
         "devenv": [
           "devenv"
         ],
+        "flake-compat": "flake-compat",
         "nixpkgs": [
           "nixpkgs-devenv"
         ],
@@ -79,11 +80,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730349049,
-        "narHash": "sha256-DnAJD6t0cIs+dr742pF4U43dxpVqrroy009UjcqEq6I=",
+        "lastModified": 1731639689,
+        "narHash": "sha256-PVdnZ5CEhCo3jt3l7vNUfCbvfxn0t6/FrVcKiL5I61o=",
         "owner": "starptr",
         "repo": "chaseln",
-        "rev": "f0a373d3f697bd3406966cc43d0c8592218feb46",
+        "rev": "1b67f857c5cae554a68249f50c4489354a1e787d",
         "type": "github"
       },
       "original": {
@@ -100,7 +101,7 @@
         "fenix": [
           "fenix"
         ],
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "nixpkgs": [
           "nixpkgs-devenv"
         ],
@@ -125,7 +126,7 @@
     "devenv": {
       "inputs": {
         "cachix": "cachix",
-        "flake-compat": "flake-compat_3",
+        "flake-compat": "flake-compat_4",
         "nix": "nix_3",
         "nixpkgs": [
           "nixpkgs-devenv"
@@ -251,6 +252,20 @@
       }
     },
     "flake-compat_2": {
+      "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "revCount": 57,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/edolstra/flake-compat/1.0.1/018afb31-abd1-7bff-a5e4-cff7e18efb7a/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz"
+      }
+    },
+    "flake-compat_3": {
       "flake": false,
       "locked": {
         "lastModified": 1673956053,
@@ -266,7 +281,7 @@
         "type": "github"
       }
     },
-    "flake-compat_3": {
+    "flake-compat_4": {
       "flake": false,
       "locked": {
         "lastModified": 1696426674,
@@ -390,7 +405,7 @@
     },
     "nix": {
       "inputs": {
-        "flake-compat": "flake-compat_2",
+        "flake-compat": "flake-compat_3",
         "nixpkgs": [
           "devenv",
           "cachix",

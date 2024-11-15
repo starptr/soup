@@ -1,9 +1,16 @@
-{ stdenv, maybe-flake-inputs }:
+{ stdenv, fetchFromGitHub, maybe-flake-inputs, flake-lock }:
 let
-  chaseln-flake = if builtins.isNull maybe-flake-inputs
+  node-name = flake-lock.nodes.root.inputs.chaseln;
+  locked = flake-lock.nodes.${node-name}.locked;
+  chaseln = if builtins.isNull maybe-flake-inputs
     then
-      builtins.getFlake "github:starptr/chaseln/9a72313e441b55104e1cdf759f8da20c39ac32b6"
+      import (fetchFromGitHub {
+        owner = locked.owner;
+        repo = locked.repo;
+        rev = locked.rev;
+        hash = locked.narHash;
+      })
     else
-      maybe-flake-inputs.chaseln;
+      maybe-flake-inputs.chaseln.packages.${stdenv.hostPlatform.system}.default;
 in
-chaseln-flake.packages.${stdenv.hostPlatform.system}.default
+chaseln
