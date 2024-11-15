@@ -22,6 +22,6 @@ in
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
   love = callPackageWithMaybeFlakeInputs ./pkgs/love { };
-  chaseln = callPackageWithMaybeFlakeInputs ./pkgs/chaseln { };
+  chaseln = callPackageWithMaybeFlakeInputs ./pkgs/chaseln.nix { };
   dark-notify = callPackageWithMaybeFlakeInputs ./pkgs/dark-notify.nix { };
 }
