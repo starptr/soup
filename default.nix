@@ -18,5 +18,5 @@
   # ...
   love = pkgs.callPackage ./pkgs/love { inherit maybe-flake-inputs; };
   chaseln = pkgs.callPackage ./pkgs/chaseln { inherit maybe-flake-inputs; };
-  dark-notify = pkgs.callPackage ./pkgs/dark-notify { inherit maybe-flake-inputs; };
+  dark-notify = pkgs.callPackage ./pkgs/dark-notify.nix { inherit maybe-flake-inputs; };
 }
