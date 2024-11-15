@@ -8,8 +8,9 @@
 
 { pkgs ? import <nixpkgs> { }, maybe-flake-inputs ? null }:
 let
+  flake-lock = builtins.fromJSON (builtins.readFile ./flake.lock);
   callPackageWithMaybeFlakeInputs = pkgs.lib.callPackageWith (pkgs // {
-    inherit maybe-flake-inputs;
+    inherit maybe-flake-inputs flake-lock;
   });
 in
 {
