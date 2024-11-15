@@ -9,6 +9,7 @@
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs-devenv";
     };
+    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
 
     love = {
       url = "https://github.com/love2d/love/releases/download/11.5/love-11.5-macos.zip";
@@ -20,6 +21,7 @@
         nixpkgs.follows = "nixpkgs-devenv";
         systems.follows = "systems";
         devenv.follows = "devenv";
+        flake-compat.follows = "flake-compat";
       };
     };
     dark-notify = {
@@ -29,6 +31,7 @@
         systems.follows = "systems";
         devenv.follows = "devenv";
         fenix.follows = "fenix";
+        flake-compat.follows = "flake-compat";
       };
     };
     fenix = {
