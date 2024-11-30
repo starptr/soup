@@ -66,16 +66,42 @@
         "armv7l-linux"
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+      # TODO: remove in favor of `exports`
       flake-inputs = {
         inherit (inputs) love chaseln dark-notify fenix check-gits;
       };
+      # List of flake inputs that we want to transparently re-export (i.e. without custom packaging)
+      exports = import ./exports.nix;
+      # An attrset of each flake's canonical name to its default package
+      default-packages = system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          lib = pkgs.lib;
+          # List of all of the flake inputs that are packages we want to re-export
+          flakes = builtins.attrValues
+            # Only keep the inputs that are listed in `exports`
+            (lib.filterAttrs (input-name: v: (builtins.elem input-name exports)) inputs);
+          # Converts a flake into a flake tagged with its canonical name
+          extendCanonicalName = flake: {
+            # TODO: Expose `pname` in the upstream derivation, since `name` includes the flake's version
+            name = flake.packages.${system}.default.name;
+            value = flake.packages.${system}.default;
+          };
+        in
+          # Transposes the list of name-value attrsets into one name:value attrset
+          builtins.listToAttrs (map extendCanonicalName flakes);
     in
     {
-      legacyPackages = forAllSystems (system: import ./default.nix {
-        maybe-flake-inputs = flake-inputs;
-        pkgs = import nixpkgs { inherit system; };
-      });
-      packages = forAllSystems (system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system});
+      exports = exports;
+      inputs = inputs;
+      legacyPackages = forAllSystems (system:
+        (default-packages system)
+        // (import ./extraPackages.nix {
+          maybe-flake-inputs = flake-inputs;
+          pkgs = import nixpkgs { inherit system; };
+        })
+      );
+      #packages = forAllSystems (system: nixpkgs.lib.filterAttrs (_: v: nixpkgs.lib.isDerivation v) self.legacyPackages.${system});
       overlays = import ./overlays { maybe-flake-inputs = flake-inputs; };
     };
 }
