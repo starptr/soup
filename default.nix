@@ -25,4 +25,5 @@ in
   love = callPackageWithMaybeFlakeInputs ./pkgs/love { };
   chaseln = callPackageWithMaybeFlakeInputs ./pkgs/chaseln.nix { };
   dark-notify = callPackageWithMaybeFlakeInputs ./pkgs/dark-notify.nix { };
+  check-gits = callPackageWithMaybeFlakeInputs ./pkgs/check-gits.nix { };
 }

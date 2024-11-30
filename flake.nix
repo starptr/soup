@@ -10,6 +10,10 @@
       inputs.nixpkgs.follows = "nixpkgs-devenv";
     };
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     love = {
       url = "https://github.com/love2d/love/releases/download/11.5/love-11.5-macos.zip";
@@ -19,24 +23,23 @@
       url = "github:starptr/chaseln";
       inputs = {
         nixpkgs.follows = "nixpkgs-devenv";
-        systems.follows = "systems";
         devenv.follows = "devenv";
-        flake-compat.follows = "flake-compat";
       };
     };
     dark-notify = {
       url = "github:starptr/dark-notify";
       inputs = {
         nixpkgs.follows = "nixpkgs-devenv";
-        systems.follows = "systems";
         devenv.follows = "devenv";
         fenix.follows = "fenix";
-        flake-compat.follows = "flake-compat";
       };
     };
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    check-gits = {
+      url = "github:starptr/check-gits";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-devenv";
+        devenv.follows = "devenv";
+      };
     };
   };
 
@@ -64,7 +67,7 @@
       ];
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
       flake-inputs = {
-        inherit (inputs) love chaseln dark-notify fenix;
+        inherit (inputs) love chaseln dark-notify fenix check-gits;
       };
     in
     {

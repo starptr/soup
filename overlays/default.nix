@@ -17,4 +17,12 @@
       }
     else
       maybe-flake-inputs.chaseln.overlays.default;
+  
+  check-gits = if builtins.isNull maybe-flake-inputs
+    then
+      self: super: {
+        check-gits = (self.callPackage ../. { inherit maybe-flake-inputs; }).check-gits;
+      }
+    else
+      maybe-flake-inputs.check-gits.overlays.default;
 }
