@@ -84,7 +84,7 @@
           # Converts a flake into a flake tagged with its canonical name
           extendCanonicalName = flake: {
             # TODO: Expose `pname` in the upstream derivation, since `name` includes the flake's version
-            name = flake.packages.${system}.default.name;
+            name = flake.packages.${system}.default.input.pname;
             value = flake.packages.${system}.default;
           };
         in
@@ -92,8 +92,10 @@
           builtins.listToAttrs (map extendCanonicalName flakes);
     in
     {
-      exports = exports;
-      inputs = inputs;
+      # Debug values
+      #exports = exports;
+      #inputs = inputs;
+      # ^ Debug values
       legacyPackages = forAllSystems (system:
         (default-packages system)
         // (import ./extraPackages.nix {
